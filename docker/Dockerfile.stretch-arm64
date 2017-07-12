@@ -1,0 +1,17 @@
+FROM facette/build:stretch-amd64
+
+MAINTAINER Development Team <dev@facette.io>
+
+RUN dpkg --add-architecture arm64 && \
+    apt-get update && \
+    apt-get install --no-install-recommends -y \
+        libc6-dev:arm64 \
+        linux-libc-dev:arm64 \
+        librrd-dev:arm64 \
+        crossbuild-essential-arm64 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV CC=aarch64-linux-gnu-gcc GOARCH=arm64
+
+# vim: ft=dockerfile ts=4 sw=4 et

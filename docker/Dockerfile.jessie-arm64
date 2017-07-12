@@ -1,0 +1,19 @@
+FROM facette/build:jessie-amd64
+
+MAINTAINER Development Team <dev@facette.io>
+
+RUN echo "deb http://emdebian.org/tools/debian/ jessie main" >>/etc/apt/sources.list && \
+    curl -s http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | apt-key add - && \
+    dpkg --add-architecture arm64 && \
+    apt-get update && \
+    apt-get install --no-install-recommends -y -t jessie-backports \
+        libc6-dev:arm64 \
+        linux-libc-dev:arm64 \
+        librrd-dev:arm64 \
+        crossbuild-essential-arm64 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV CC=aarch64-linux-gnu-gcc GOARCH=arm64
+
+# vim: ft=dockerfile ts=4 sw=4 et
