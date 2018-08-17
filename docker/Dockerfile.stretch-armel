@@ -1,0 +1,17 @@
+FROM facette/buildenv:stretch-amd64
+
+LABEL maintainer="Development Team <dev@facette.io>"
+
+RUN dpkg --add-architecture armel && \
+    apt-get update && \
+    apt-get install --no-install-recommends -t stretch-backports -y \
+        crossbuild-essential-armel \
+        libc6-dev:armel \
+        librrd-dev:armel \
+        linux-libc-dev:armel && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV CC=arm-linux-gnueabi-gcc GOARCH=arm
+
+# vim: ft=dockerfile ts=4 sw=4 et

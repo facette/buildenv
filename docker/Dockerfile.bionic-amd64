@@ -1,0 +1,39 @@
+FROM ubuntu:bionic
+
+LABEL maintainer="Development Team <dev@facette.io>"
+
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        build-essential \
+        ca-certificates \
+        curl \
+        debhelper \
+        devscripts \
+        dh-systemd \
+        fakeroot \
+        git \
+        gnupg \
+        golang-go \
+        librrd-dev \
+        lsb-release \
+        nodejs \
+        npm \
+        pandoc \
+        pkg-config \
+        quilt \
+        xz-utils && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN go get github.com/jteeuwen/go-bindata/... && \
+    npm install -g yarn
+
+ENV PATH=${PATH}:/root/go/bin
+
+ENV CGO_ENABLED=1 GOOS=linux GOARCH=amd64
+
+WORKDIR /root/go/src/facette.io/facette
+
+CMD bash
+
+# vim: ft=dockerfile ts=4 sw=4 et
