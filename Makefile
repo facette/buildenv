@@ -4,8 +4,10 @@ FLAVORS = $(sort $(patsubst docker/Dockerfile.%,%,$(wildcard docker/Dockerfile.*
 
 all: build
 
-clean:
-	docker rmi $(FLAVORS:%=facette/buildenv:%)
+clean: $(FLAVORS:%=clean-%)
+
+clean-%:
+	-docker rmi $(@:clean-%=facette/buildenv:%)
 
 build: $(FLAVORS:%=build-%)
 
