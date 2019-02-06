@@ -1,7 +1,7 @@
 Facette build environments
 ==========================
 
-Supported Environements
+Supported environements
 -----------------------
 
 The currently supported build environments are:
@@ -14,14 +14,11 @@ Usage
 
 Initialize the various Docker images using:
 
-    make images
+    make
 
-To build **all the distribution** files, execute:
+To generate all the distribution files, go back to Facette source directory
+and execute:
 
-    make release
+    ./misc/scripts/release.sh
 
-To build a specific distribution/architecture, use any of the following
-commands:
-
-    make binary-stretch-armel
-    make debian-stretch-amd64
+Distribution files will then be available in the `dist/` directory.
