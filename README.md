@@ -6,7 +6,7 @@ Supported environements
 
 The currently supported build environments are:
 
- * Debian Stretch (amd64, arm64 and armel)
+ * Debian Stretch (amd64, arm64, armel and armhf)
  * Ubuntu Bionic (amd64)
 
 Usage
